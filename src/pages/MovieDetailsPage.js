@@ -1,7 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
 // import { compileString } from "sass";
 import useSWR from "swr";
+import MovieCard from "../components/movie/MovieCard";
 import { apiKey, fetcher } from "../config";
 //
 
@@ -51,6 +53,7 @@ const MovieDetailsPage = () => {
       </p>
       <MovieCredits></MovieCredits>
       <MovieVideos></MovieVideos>
+      <MovieSimilar></MovieSimilar>
     </div>
   );
 };
@@ -90,9 +93,60 @@ function MovieVideos() {
     fetcher
   );
   if (!data) return null;
-  const { cast } = data;
-  if (!cast || cast.length <= 0) return null;
-  return <div></div>;
+  const { results } = data;
+  if (!results || results.length <= 0) return null;
+
+  return (
+    <div className="py-10">
+      <div className="flex flex-col gap-10">
+        {results.slice(0, 2).map((item) => (
+          <div className="" key={item.id}>
+            <h3 className="mb-5 text-xl font-medium p-3 bg-secondary inline-block">
+              {item.name}
+            </h3>
+            <div key={item.id} className="w-full aspect-video">
+              <iframe
+                width="853"
+                height="480"
+                src={`https://www.youtube.com/embed/${item.key}`}
+                title="d4vd - Here With Me (Lyrics)"
+                // frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                className="w-full h-full object-fill"
+              ></iframe>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MovieSimilar() {
+  const { movieId } = useParams();
+  const { data, error } = useSWR(
+    `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}`,
+    fetcher
+  );
+  if (!data) return null;
+  const { results } = data;
+  if (!results || results.length <= 0) return null;
+  return (
+    <div className="py-10">
+      <h2 className="text-3xl font-medium mb-10">Similar movies</h2>
+      <div className="movie-list">
+        <Swiper grabCursor={"true"} spaceBetween={40} slidesPerView={"auto"}>
+          {results.length > 0 &&
+            results.map((item) => (
+              <SwiperSlide key={item.id}>
+                <MovieCard item={item}></MovieCard>
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </div>
+    </div>
+  );
 }
 
 export default MovieDetailsPage;
