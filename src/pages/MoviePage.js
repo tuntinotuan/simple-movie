@@ -17,6 +17,7 @@ const MoviePage = () => {
   );
   const filterDebounce = useDebounce(filter, 500);
   const handleFilterChange = (e) => {
+    // setNextPage(1);
     setFilter(e.target.value);
   };
   const { data, error } = useSWR(url, fetcher);
@@ -35,11 +36,11 @@ const MoviePage = () => {
 
   const movies = data?.results || [];
   useEffect(() => {
-    if (!data || !data.total_pages) return;
-    setPageCount(Math.ceil(data.total_pages / itemsPerPage));
+    if (!data || !data.total_results) return;
+    setPageCount(Math.ceil(data.total_results / itemsPerPage));
   }, [data, itemOffset]);
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % data.total_pages;
+    const newOffset = (event.selected * itemsPerPage) % data.total_results;
     setItemOffset(newOffset);
     setNextPage(event.selected + 1);
   };
@@ -81,15 +82,18 @@ const MoviePage = () => {
             <MovieCard key={item.id} item={item}></MovieCard>
           ))}
       </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+      <div className="mt-10">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          className="pagination"
+        />
+      </div>
     </div>
   );
 };
