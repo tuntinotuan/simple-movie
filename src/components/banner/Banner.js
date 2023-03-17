@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 
 const Banner = () => {
-  const { data, error } = useSWR(
+  const { data } = useSWR(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=3d822c02b85d7e4e8fb9dd03e653e84a`,
     fetcher
   );
@@ -50,12 +50,6 @@ function BannerItem({ item }) {
           </span>
         </div>
         <Button onClick={() => navigate(`/movie/${id}`)}>Watch now</Button>
-        {/* <button
-          onClick={() => navigate(`/movie/${id}`)}
-          className="py-3 px-6 rounded-lg bg-primary text-white font-medium"
-        >
-          Watch now
-        </button> */}
       </div>
     </div>
   );
