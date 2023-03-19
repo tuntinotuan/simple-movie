@@ -1,6 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import { SwiperSlide, Swiper } from "swiper/react";
+import { Autoplay } from "swiper";
 import { fetcher } from "apiConfig/config";
 import { useNavigate } from "react-router-dom";
 import Button from "components/button/Button";
@@ -14,7 +15,12 @@ const Banner = () => {
   console.log("movies", movies);
   return (
     <section className="banner h-[500px] page-container mb-20 overflow-hidden">
-      <Swiper grabCursor="true" slidesPerView={"auto"}>
+      <Swiper
+        grabCursor="true"
+        slidesPerView={"auto"}
+        modules={[Autoplay]}
+        autoplay={true}
+      >
         {movies.length > 0 &&
           movies.map((item) => (
             <SwiperSlide key={item.id}>
