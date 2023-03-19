@@ -2,8 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useSWR from "swr";
-import MovieCard from "../components/movie/MovieCard";
-import { fetcher, tmdbApi } from "../config";
+import MovieCard from "components/movie/MovieCard";
+import { fetcher, tmdbApi } from "apiConfig/config";
 //
 
 const MovieDetailsPage = () => {
@@ -65,7 +65,7 @@ function MovieCredits() {
       <h2 className="text-center text-3xl mb-10">Casts</h2>
       <div className="grid grid-cols-4 gap-5">
         {cast.slice(0, 4).map((item) => (
-          <div className="cast-item">
+          <div className="cast-item" key={item.id}>
             <img
               src={tmdbApi.imageOriginal(item.profile_path)}
               className="w-full h-[350px] object-cover rounded-lg"
@@ -102,7 +102,7 @@ function MovieVideos() {
                 title="d4vd - Here With Me (Lyrics)"
                 // frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
+                allowFullScreen
                 className="w-full h-full object-fill"
               ></iframe>
             </div>

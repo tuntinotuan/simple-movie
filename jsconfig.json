@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "paths": {
-      "@/components/*": ["src/components/*"],
-      "@config": ["src/config.js"]
-    }
   }
 }

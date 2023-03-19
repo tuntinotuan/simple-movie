@@ -1,9 +1,9 @@
 import React from "react";
 import useSWR from "swr";
 import { SwiperSlide, Swiper } from "swiper/react";
-import { fetcher } from "../../config";
+import { fetcher } from "apiConfig/config";
 import { useNavigate } from "react-router-dom";
-import Button from "../button/Button";
+import Button from "components/button/Button";
 
 const Banner = () => {
   const { data } = useSWR(
@@ -30,7 +30,7 @@ function BannerItem({ item }) {
   const navigate = useNavigate();
   return (
     <div className="w-full h-full rounded-lg relative">
-      <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] from-[rgba(0,0,0,0.5)] rounded-lg"></div>
+      <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] rounded-lg"></div>
       <img
         src={`https://image.tmdb.org/t/p/original/${poster_path}`}
         alt=""

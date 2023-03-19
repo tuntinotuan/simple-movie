@@ -3,7 +3,7 @@ import "swiper/scss";
 import { SwiperSlide, Swiper } from "swiper/react";
 import MovieCard from "./MovieCard";
 import useSWR from "swr";
-import { fetcher, tmdbApi } from "../../config";
+import { fetcher, tmdbApi } from "apiConfig/config";
 // import { useSWRConfig } from "swr";
 
 const MovieList = ({ type = "now_playing" }) => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import MovieCard from "../components/movie/MovieCard";
-import { fetcher, tmdbApi } from "../config";
-import useDebounce from "../hooks/useDebounce";
+import MovieCard from "components/movie/MovieCard";
+import { fetcher, tmdbApi } from "apiConfig/config";
+import useDebounce from "hooks/useDebounce";
 import ReactPaginate from "react-paginate";
 const itemsPerPage = 20;
 // https://api.themoviedb.org/3/search/movie?api_key=3d822c02b85d7e4e8fb9dd03e653e84a
